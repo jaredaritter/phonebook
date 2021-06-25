@@ -1,0 +1,2 @@
+@personId = 4
+DELETE http://localhost:3001/api/persons/{{personId}}
