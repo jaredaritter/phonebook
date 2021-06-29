@@ -48,19 +48,19 @@ const isInPersons = (name) => {
     : false;
 };
 
-const requestLogger = (req, res, next) => {
-  console.log('Method:', req.method);
-  console.log('Path:', req.path);
-  console.log('Body:', req.body);
-  console.log('----------------');
-  next();
-};
+// MIDDLEWARE FOR EXAMPLE. REPLACED WITH MORGAN PACKAGE
+// const requestLogger = (req, res, next) => {
+//   console.log('Method:', req.method);
+//   console.log('Path:', req.path);
+//   console.log('Body:', req.body);
+//   console.log('----------------');
+//   next();
+// };
+// app.use(requestLogger);
 
 const unknownEndpoint = (req, res, next) => {
   res.status(404).send({ error: 'unknown endpoint' });
 };
-
-app.use(requestLogger);
 
 // routes
 app.get('/info', (req, res) => {
@@ -85,16 +85,24 @@ app.get('/api/persons/:id', (req, res) => {
 });
 
 app.post('/api/persons', (req, res) => {
-  if (!req.body.name || !req.body.number) {
-    return res.status(404).send({ error: 'Name and number required' });
-  }
-  if (isInPersons(req.body.name)) {
-    return res.status(404).send({ error: 'Name already in phonebook' });
-  }
   const body = req.body;
-  body.id = generateId();
-  persons = persons.concat(body);
-  res.send('Person posted');
+
+  if (!body.name) {
+    return res.status(400).json({ error: 'Name required' });
+  } else if (!body.number) {
+    return res.status(400).json({ error: 'Number required' });
+  } else if (isInPersons(body.name)) {
+    return res.status(400).json({ error: 'Name already in phonebook' });
+  }
+
+  const person = {
+    name: body.name,
+    number: body.number,
+    id: generateId(),
+  };
+  persons = persons.concat(person);
+  // REACT IS USING THE RETURNED OBJECT TO BUILD THE ELEMENT AND ASSIGN ITS KEY
+  res.json(person);
 });
 
 app.delete('/api/persons/:id', (req, res) => {
