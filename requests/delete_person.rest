@@ -1,2 +1,5 @@
-@personId = 4
+@personId = 5755
 DELETE http://localhost:3001/api/persons/{{personId}}
+
+###
+DELETE https://boiling-fortress-91832.herokuapp.com/api/persons/{{personId}}

@@ -11,6 +11,6 @@ POST https://boiling-fortress-91832.herokuapp.com/api/persons
 content-type: application/json
 
 {
-  "name": "penn boxman",
+  "name": "penny boxman",
   "number": "555-555-5555"
 }
