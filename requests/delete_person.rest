@@ -1,4 +1,4 @@
-@personId = 5755
+@personId = 6965
 DELETE http://localhost:3001/api/persons/{{personId}}
 
 ###
