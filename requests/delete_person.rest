@@ -1,5 +1,14 @@
-@personId = 6965
+@personId = 60e86f7ab534492ea73be0c5
+@malformedId = 123abc
+
+###
+// LOCAL 204
 DELETE http://localhost:3001/api/persons/{{personId}}
 
 ###
+// LOCAL 400 MALFORMED
+DELETE http://localhost:3001/api/persons/{{malformedId}}
+
+###
+// HEROKU
 DELETE https://boiling-fortress-91832.herokuapp.com/api/persons/{{personId}}

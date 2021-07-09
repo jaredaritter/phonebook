@@ -1,0 +1,15 @@
+@id = 60e7536b3f3c154cd27d7a2e
+@wrongId = 60e7536b3f3c154cd27d7a2f
+@malformedId = 123abc
+
+###
+// 204 IN DB
+GET http://localhost:3001/api/persons/{{id}}
+
+###
+// 404 NOT IN DB
+GET http://localhost:3001/api/persons/{{wrongId}}
+
+###
+// 400
+GET http://localhost:3001/api/persons/{{malformedId}}

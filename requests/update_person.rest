@@ -1,0 +1,11 @@
+@id = 60e86f2112bd7e2dd14032a0
+
+###
+// LOCAL
+PUT http://localhost:3001/api/persons/{{id}}
+content-type: application/json
+
+{
+  "name": "Other Boxman",
+  "number": "555-555-5556"
+}
