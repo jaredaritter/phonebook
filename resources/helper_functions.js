@@ -18,6 +18,8 @@ const errorHandler = (err, req, res, next) => {
     return res.status(400).send({ error: 'Malformed id' });
   } else if (err.name === 'TypeError') {
     return res.status(400).send({ error: 'Id wrong type' });
+  } else if (err.name === 'ValidationError') {
+    return res.status(400).send(err.message);
   }
 
   next(err);
